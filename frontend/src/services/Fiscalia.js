@@ -6,7 +6,6 @@ const getFiscalias = async () => {
   const resDatosTable = await clienteAxios
     .get("/fiscalias")
     .then((res) => {
-        console.log(res.data)
       return res.data
     })
     .catch((err) => {

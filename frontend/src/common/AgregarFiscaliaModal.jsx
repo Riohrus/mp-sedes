@@ -36,7 +36,7 @@ const ModalAgregarFiscalia = ({ show, onHide, recargarDatos, dataFiscal }) => {
     event.preventDefault();
 
     try {
-        let respuesta = {}
+      let respuesta = {};
       if (dataFiscal === null) {
         respuesta = await saveFiscalia({
           codigoFiscalia,
@@ -44,16 +44,14 @@ const ModalAgregarFiscalia = ({ show, onHide, recargarDatos, dataFiscal }) => {
           ubicacion,
           numeroTelefono,
         });
-      }else {
-        respuesta = await updateFiscalia(codigoFiscalia,{
-            codigoFiscalia,
-            nombre,
-            ubicacion,
-            numeroTelefono,
-          });
+      } else {
+        respuesta = await updateFiscalia(codigoFiscalia, {
+          codigoFiscalia,
+          nombre,
+          ubicacion,
+          numeroTelefono,
+        });
       }
-
-      console.log(respuesta.data);
       recargarDatos();
       onHide();
     } catch (error) {
@@ -124,7 +122,7 @@ const ModalAgregarFiscalia = ({ show, onHide, recargarDatos, dataFiscal }) => {
             Cancelar
           </Button>
           <Button variant="primary" type="submit">
-            {dataFiscal === null ? 'Agregar' : 'Editar'}
+            {dataFiscal === null ? "Agregar" : "Editar"}
           </Button>
         </Modal.Footer>
       </Form>

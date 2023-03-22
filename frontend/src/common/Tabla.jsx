@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
-import { getFiscalias, obtenerFiscaliaPorId, deleteFiscalias } from "../services/Fiscalia";
+import {
+  getFiscalias,
+  obtenerFiscaliaPorId,
+  deleteFiscalias,
+} from "../services/Fiscalia";
 import ModalAgregarFiscalia from "../common/AgregarFiscaliaModal.jsx";
 
 const TablaFiscalias = () => {
   const [fiscalias, setFiscalias] = useState([]);
   const [mostrarModal, setMostrarModal] = useState(false);
-  const [dataFiscalia, setDataFiscalia] = useState(null)
+  const [dataFiscalia, setDataFiscalia] = useState(null);
 
   useEffect(() => {
     obtenerFiscalias();
@@ -18,7 +22,7 @@ const TablaFiscalias = () => {
   };
 
   const abrirModal = () => {
-    setDataFiscalia(null)
+    setDataFiscalia(null);
     setMostrarModal(true);
   };
 
@@ -27,30 +31,24 @@ const TablaFiscalias = () => {
   };
 
   const editarFiscalia = async (id) => {
-  // Obtener los datos actuales de la fila seleccionada
-  const response = await obtenerFiscaliaPorId(id);
+    // Obtener los datos actuales de la fila seleccionada
+    const response = await obtenerFiscaliaPorId(id);
 
-  if (response.success) {
-    // Establecer los datos de la fila seleccionada
-    setDataFiscalia(response.data);
-    setMostrarModal(true);
+    if (response.success) {
+      // Establecer los datos de la fila seleccionada
+      setDataFiscalia(response.data);
+      setMostrarModal(true);
+    } else {
+      // Mostrar un mensaje de error si no se pudieron obtener los datos
+      alert(response.mensaje);
+    }
+  };
 
-    console.log(response.data)
-
-    console.log(filaSeleccionada)
-  } else {
-    // Mostrar un mensaje de error si no se pudieron obtener los datos
-    alert(response.mensaje);
-  }
-};
-
-const eliminarFiscalia = async (id) => {
-  // Obtener los datos actuales de la fila seleccionada
-  const response = await deleteFiscalias(id);
-  obtenerFiscalias()
-  
-  
-};
+  const eliminarFiscalia = async (id) => {
+    // Obtener los datos actuales de la fila seleccionada
+    const response = await deleteFiscalias(id);
+    obtenerFiscalias();
+  };
 
   return (
     <div>
@@ -78,7 +76,9 @@ const eliminarFiscalia = async (id) => {
                 </button>
               </td>
               <td>
-                <button onClick={() => eliminarFiscalia(fiscalia.codigoFiscalia)}>
+                <button
+                  onClick={() => eliminarFiscalia(fiscalia.codigoFiscalia)}
+                >
                   Eliminar
                 </button>
               </td>
@@ -92,7 +92,6 @@ const eliminarFiscalia = async (id) => {
         recargarDatos={obtenerFiscalias}
         dataFiscal={dataFiscalia}
       ></ModalAgregarFiscalia>
-    
     </div>
   );
 };

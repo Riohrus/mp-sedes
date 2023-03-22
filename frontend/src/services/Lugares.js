@@ -6,7 +6,6 @@ const getLugares = async () => {
   const resDatosTable = await clienteAxios
     .get("/lugares")
     .then((res) => {
-        console.log(res.data)
       return res.data
     })
     .catch((err) => {

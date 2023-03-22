@@ -61,7 +61,6 @@ async function getAllFiscalias(req, res) { //obtener todos los registros
 
   async function insertFiscalias(req, res) {
     const { codigoFiscalia, nombre, ubicacion, numeroTelefono } = req.body;
-    console.log(codigoFiscalia, nombre, ubicacion, numeroTelefono)
     try {
       const nuevaFiscalia = await FiscaliaModel.create({
         codigoFiscalia,
